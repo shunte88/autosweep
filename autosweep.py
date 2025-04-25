@@ -25,7 +25,6 @@ sweep_opts = {
     'log_dir': os.path.join(os.getcwd(), "logs"),
     'logging_verbose': True,
     'webdriver_logging': 3,
-    'FOOD_ngxFrame': '284415',
 }
 
 def ensure_log_dir():
@@ -176,26 +175,27 @@ if __name__ == "__main__":
     sys.path.append(sweep_opts['chromeProfilePath'])
     profile_dir = os.path.basename(chromeProfilePath)
     sys.path.append(sweep_opts['profile_dir'])
-    
+
+    # re-init each time - think???
+    driver = init_browser(
+        chrome_browser_options(sweep_opts)
+    )
+
     # enter all active sweepstakes
     for sweep_url in [
-        'https://www.hgtv.com/sweepstakes/get-outside?xp=sistersite',
         'https://www.hgtv.com/sponsored/sweeps/valspar-made-for-more-sweepstakes',
-        'https://www.hgtv.com/sweepstakes/5k-grocery-giveaway?xp=sistersite',
+        'https://www.hgtv.com/sweepstakes/get-outside?xp=sistersite',
         'https://www.foodnetwork.com/sponsored/sweepstakes/get-outside?xp=sistersite',
+        'https://www.hgtv.com/sweepstakes/5k-grocery-giveaway?xp=sistersite',
         'https://www.foodnetwork.com/sponsored/sweepstakes/5k-grocery-giveaway?xp=sistersite',
-        'https://www.foodnetwork.com/sponsored/sweepstakes/spring-it-forward?xp=sistersite',
         'https://www.tlc.com/sweepstakes/spring-it-forward?xp=sistersite',
+        'https://www.foodnetwork.com/sponsored/sweepstakes/spring-it-forward?xp=sistersite',
     ]:
-        logging.info(f"Init browser for {sweep_url}")
-        # re-init each time - think???
-        driver = init_browser(
-            chrome_browser_options(sweep_opts)
-        )
         try:
             fill_sweepstake_form(driver, config, sweep_url)
         except:
             pass
         finally:
             time.sleep(5)
-            driver.quit()
+
+    driver.quit()
