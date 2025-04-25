@@ -1,0 +1,10 @@
+setup:
+  firstname: Stuart
+  lastname: Hunter
+  email: stuart.hunter@comcast.net
+  zip: 01239
+  address: 101B Brookline Street
+  dob-month: April
+  dob-day: 30
+  dob-year: 1964
+  state: Massachusetts
