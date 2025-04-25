@@ -13,3 +13,4 @@ wheels/
 chrome_profile
 *.txt
 logs
+config.yml

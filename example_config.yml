@@ -1,0 +1,10 @@
+setup:
+  firstname:
+  lastname:
+  email:
+  zip:
+  address:
+  dob-month:
+  dob-day:
+  dob-year:
+  state:
